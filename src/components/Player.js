@@ -7,7 +7,7 @@ export const player = Player();
 function Player() {
   const player = new THREE.Group();
   
-  
+  // Test comment
   const gltfLoader = new GLTFLoader();
   const rov = new THREE.Mesh();
   gltfLoader.load(
@@ -15,20 +15,13 @@ function Player() {
       (gltf) =>
       {
       
-      const rovMaterial = new THREE.MeshStandardMaterial();
+      gltf.scene.children.forEach((mesh) => {
+        mesh.castShadow = true;
+        mesh.receiveShadow = true;
+      })
 
-      // gltf.scene.children.forEach((mesh) => {
-      //   mesh.castShadow = true;
-      //   mesh.receiveShadow = true;
-      //   mesh.material = rovMaterial;
-        
-      // })
-      console.log(gltf);
-      gltf.scene.material = rovMaterial;
-      gltf.scene.castShadow = true;
-      gltf.scene.receiveShadow = true;
       gltf.scene.position.z = 20;
-      gltf.scene.scale.set(12, 12, 12);
+      gltf.scene.scale.set(10, 10, 10);
       gltf.scene.rotateX(Math.PI / 2);
       gltf.scene.rotateY(Math.PI);
       
@@ -41,7 +34,7 @@ function Player() {
 
   const body = new THREE.Mesh(
     new THREE.BoxGeometry(15, 15, 15),
-    new THREE.MeshStandardMaterial({
+    new THREE.MeshLambertMaterial({
       color: "white",
       flatShading: true,
     })
