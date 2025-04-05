@@ -9,6 +9,7 @@ import { tileSize } from "./constants";
 
 const moveClock = new THREE.Clock(false);
 
+//test
 export function animatePlayer() {
   if (!movesQueue.length) return;
 
