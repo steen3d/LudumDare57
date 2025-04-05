@@ -14,17 +14,21 @@ function Player() {
       './models/ROV.glb',
       (gltf) =>
       {
-      gltf.scene.children[0].castShadow = true;
-      gltf.scene.children[0].receiveShadowShadow = true;
-      gltf.scene.children[0].position.z = 20;
-      gltf.scene.children[0].scale.set(5, 5, 5);
-      gltf.scene.children[0].rotateX(Math.PI / 2);
-      gltf.scene.children[0].rotateZ(Math.PI);
+      
+      gltf.scene.children.forEach((mesh) => {
+        mesh.castShadow = true;
+        mesh.receiveShadow = true;
+      })
+
+      gltf.scene.position.z = 20;
+      gltf.scene.scale.set(10, 10, 10);
+      gltf.scene.rotateX(Math.PI / 2);
+      gltf.scene.rotateY(Math.PI);
       
       // generateCollision(gltf.scene.children[0], lampBody);
 
       // importedMeshes.add(gltf.scene);
-      rov.add(gltf.scene.children[0]);
+      rov.add(gltf.scene);
       }
   )
 
