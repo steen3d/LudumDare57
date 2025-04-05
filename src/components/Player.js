@@ -1,10 +1,32 @@
 import * as THREE from "three";
 import { endsUpInValidPosition } from "../utilities/endsUpInValidPosition";
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
 export const player = Player();
 
 function Player() {
   const player = new THREE.Group();
+  
+  
+  const gltfLoader = new GLTFLoader();
+  const rov = new THREE.Mesh();
+  gltfLoader.load(
+      './models/ROV.glb',
+      (gltf) =>
+      {
+      gltf.scene.children[0].castShadow = true;
+      gltf.scene.children[0].receiveShadowShadow = true;
+      gltf.scene.children[0].position.z = 20;
+      gltf.scene.children[0].scale.set(5, 5, 5);
+      gltf.scene.children[0].rotateX(Math.PI / 2);
+      gltf.scene.children[0].rotateZ(Math.PI);
+      
+      // generateCollision(gltf.scene.children[0], lampBody);
+
+      // importedMeshes.add(gltf.scene);
+      rov.add(gltf.scene.children[0]);
+      }
+  )
 
   const body = new THREE.Mesh(
     new THREE.BoxGeometry(15, 15, 15),
@@ -16,7 +38,7 @@ function Player() {
   body.position.z = 10;
   body.castShadow = true;
   body.receiveShadow = true;
-  player.add(body);
+  player.add(rov);
 
   const playerContainer = new THREE.Group();
   playerContainer.add(player);
