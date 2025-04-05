@@ -15,13 +15,20 @@ function Player() {
       (gltf) =>
       {
       
-      gltf.scene.children.forEach((mesh) => {
-        mesh.castShadow = true;
-        mesh.receiveShadow = true;
-      })
+      const rovMaterial = new THREE.MeshStandardMaterial();
 
+      // gltf.scene.children.forEach((mesh) => {
+      //   mesh.castShadow = true;
+      //   mesh.receiveShadow = true;
+      //   mesh.material = rovMaterial;
+        
+      // })
+      console.log(gltf);
+      gltf.scene.material = rovMaterial;
+      gltf.scene.castShadow = true;
+      gltf.scene.receiveShadow = true;
       gltf.scene.position.z = 20;
-      gltf.scene.scale.set(10, 10, 10);
+      gltf.scene.scale.set(12, 12, 12);
       gltf.scene.rotateX(Math.PI / 2);
       gltf.scene.rotateY(Math.PI);
       
@@ -34,7 +41,7 @@ function Player() {
 
   const body = new THREE.Mesh(
     new THREE.BoxGeometry(15, 15, 15),
-    new THREE.MeshLambertMaterial({
+    new THREE.MeshStandardMaterial({
       color: "white",
       flatShading: true,
     })
