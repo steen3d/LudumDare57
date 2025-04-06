@@ -1,36 +1,30 @@
 import * as THREE from "three";
 import { endsUpInValidPosition } from "../utilities/endsUpInValidPosition";
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+import { initializeMap } from "./Map";
 
 export const player = Player();
 
 function Player() {
   const player = new THREE.Group();
-  
-  // Test comment
   const gltfLoader = new GLTFLoader();
   const rov = new THREE.Mesh();
-  gltfLoader.load(
-      './models/ROV.glb',
-      (gltf) =>
-      {
-      
-      gltf.scene.children.forEach((mesh) => {
-        mesh.castShadow = true;
-        mesh.receiveShadow = true;
-      })
+  gltfLoader.load("./models/ROV.glb", (gltf) => {
+    gltf.scene.children.forEach((mesh) => {
+      mesh.castShadow = true;
+      mesh.receiveShadow = true;
+    });
 
-      gltf.scene.position.z = 20;
-      gltf.scene.scale.set(10, 10, 10);
-      gltf.scene.rotateX(Math.PI / 2);
-      gltf.scene.rotateY(Math.PI);
-      
-      // generateCollision(gltf.scene.children[0], lampBody);
+    gltf.scene.position.z = 20;
+    gltf.scene.scale.set(10, 10, 10);
+    gltf.scene.rotateX(Math.PI / 2);
+    gltf.scene.rotateY(Math.PI);
 
-      // importedMeshes.add(gltf.scene);
-      rov.add(gltf.scene);
-      }
-  )
+    // generateCollision(gltf.scene.children[0], lampBody);
+
+    // importedMeshes.add(gltf.scene);
+    rov.add(gltf.scene);
+  });
 
   const body = new THREE.Mesh(
     new THREE.BoxGeometry(15, 15, 15),
@@ -53,6 +47,7 @@ function Player() {
 export const position = {
   currentRow: 0,
   currentTile: 0,
+  depth: 0,
 };
 
 export const movesQueue = [];
@@ -62,6 +57,7 @@ export function queueMove(direction) {
     {
       rowIndex: position.currentRow,
       tileIndex: position.currentTile,
+      z: position.depth,
     },
     [...movesQueue, direction]
   );
@@ -78,4 +74,12 @@ export function stepCompleted() {
   if (direction === "backward") position.currentRow -= 1;
   if (direction === "left") position.currentTile -= 1;
   if (direction === "right") position.currentTile += 1;
+  if (direction === "dive") {
+    position.depth += 1;
+    initializeMap(position.depth);
+    movesQueue.unshift("dive2");
+  }
+
+  const depthDOM = document.getElementById("depthValue");
+  if (depthDOM) depthDOM.innerText = (position.depth * 100).toString();
 }
