@@ -2,6 +2,7 @@ import * as THREE from "three";
 import { endsUpInValidPosition } from "../utilities/endsUpInValidPosition";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { initializeMap } from "./Map";
+import { moveMob } from "./creatures/Mob1";
 
 export const player = Player();
 
@@ -53,6 +54,7 @@ export const position = {
 export const movesQueue = [];
 
 export function queueMove(direction) {
+  moveMob();
   const isValidMove = endsUpInValidPosition(
     {
       rowIndex: position.currentRow,
