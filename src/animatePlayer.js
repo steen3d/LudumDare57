@@ -9,7 +9,6 @@ import { tileSize } from "./constants";
 
 const moveClock = new THREE.Clock(false);
 
-//test
 export function animatePlayer() {
   if (!movesQueue.length) return;
 
@@ -26,6 +25,8 @@ export function animatePlayer() {
     stepCompleted();
     moveClock.stop();
   }
+
+
 }
 
 function setPosition(progress) {
@@ -64,3 +65,4 @@ function setRotation(progress) {
     progress
   );
 }
+

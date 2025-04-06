@@ -46,6 +46,6 @@ renderer.setAnimationLoop(animate);
 
 function animate() {
   animatePlayer();
-
+  
   renderer.render(scene, camera);
 }
