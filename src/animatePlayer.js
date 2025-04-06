@@ -15,7 +15,7 @@ export function animatePlayer() {
 
   if (!moveClock.running) moveClock.start();
 
-  const stepTime = 0.2; // Seconds it takes to take a step
+  const stepTime = 0.4; // Seconds it takes to take a step
   const progress = Math.min(1, moveClock.getElapsedTime() / stepTime);
 
   setPosition(progress);
