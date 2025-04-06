@@ -40,7 +40,7 @@ function setPosition(progress) {
 
   mob1.position.x = THREE.MathUtils.lerp(startX, endX, progress);
   mob1.position.y = THREE.MathUtils.lerp(startY, endY, progress);
-  mob1.position.z = Math.sin(progress * Math.PI) * 20; //controls the hop
+  // mob1.position.z = Math.sin(progress * Math.PI) * 20; //controls the hop
 }
 
 function setRotation(progress) {

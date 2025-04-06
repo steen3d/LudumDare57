@@ -14,7 +14,6 @@ export function Rock(tileIndex) {
     });
 
     // gltf.scene.position.z = 20;
-    gltf.scene.scale.set(1, 1, 1);
     gltf.scene.rotateX(Math.PI / 2);
     gltf.scene.rotateY(Math.PI);
 

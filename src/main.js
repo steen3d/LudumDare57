@@ -23,9 +23,9 @@ scene.add(ambientLight);
 const rgbeLoader = new RGBELoader();
 rgbeLoader.load("textures/qwantani_puresky_2k.hdr", (environmentMap) => {
   environmentMap.mapping = THREE.EquirectangularReflectionMapping;
-  scene.background = environmentMap;
+  scene.background = null;
   scene.environment = environmentMap;
-  scene.backgroundIntensity = 0;
+  scene.backgroundIntensity = 1;
 });
 
 const dirLight = DirectionalLight();
