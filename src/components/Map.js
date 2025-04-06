@@ -26,6 +26,9 @@ export function addRows(depth) {
 
     rowData.rocks.forEach(({ tileIndex }) => {
       const rock = Rock(tileIndex);
+      rock.rotation.z = Math.random() * (Math.PI * 2);
+      const randScale = Math.random() * 0.25 + 0.75;
+      rock.scale.set(randScale, randScale, randScale);
       row.add(rock);
     });
 
