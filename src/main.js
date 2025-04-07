@@ -72,5 +72,5 @@ function animate() {
   renderer.render(scene, camera);
 }
 
-const musicTrack1 = new Audio('/audio/LD57 - Explore Idea 2.mp3');
+const musicTrack1 = new Audio('./audio/LD57-ExploreIdea2.mp3');
 musicTrack1.play();
