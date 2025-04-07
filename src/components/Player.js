@@ -27,20 +27,23 @@ function Player() {
     rov.add(gltf.scene);
   });
 
-  const body = new THREE.Mesh(
-    new THREE.BoxGeometry(15, 15, 15),
-    new THREE.MeshLambertMaterial({
-      color: "white",
-      flatShading: true,
-    })
-  );
-  body.position.z = 10;
-  body.castShadow = true;
-  body.receiveShadow = true;
+  // const body = new THREE.Mesh(
+  //   new THREE.BoxGeometry(15, 15, 15),
+  //   new THREE.MeshLambertMaterial({
+  //     color: "white",
+  //     flatShading: true,
+  //   })
+  // );
+  // body.position.z = 10;
+  // body.castShadow = true;
+  // body.receiveShadow = true;
   player.add(rov);
 
   const playerContainer = new THREE.Group();
   playerContainer.add(player);
+  const playerLight = new THREE.SpotLight( 0xffffff );
+  playerLight.intensity = 300;
+  playerContainer.add(playerLight);
 
   return playerContainer;
 }

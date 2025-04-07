@@ -1,6 +1,8 @@
 import * as THREE from "three";
 import { endsUpInValidPosition } from "../../utilities/endsUpInValidPosition";
 import { tilesPerRow, maxRowIndex, tileSize } from "../../constants";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+
 
 export const position = {
   currentRow: Math.round(Math.random() * (maxRowIndex - 1)),
@@ -14,15 +16,34 @@ function Mob1() {
   mob1.position.x = position.currentTile * tileSize;
   mob1.position.y = position.currentRow * tileSize;
 
-  const body = new THREE.Mesh(
-    new THREE.BoxGeometry(10, 10, 5),
-    new THREE.MeshLambertMaterial({
-      color: "green",
-      flatShading: true,
-    })
-  );
-  body.position.z = 10;
-  mob1.add(body);
+  const fish = new THREE.Mesh();
+  const gltfLoader = new GLTFLoader();
+    gltfLoader.load("./models/Fish_Normal.glb", (gltf) => {
+      gltf.scene.children.forEach((mesh) => {
+        mesh.castShadow = true;
+        mesh.receiveShadow = true;
+      });
+  
+      gltf.scene.position.z = 20;
+      gltf.scene.scale.set(25, 25, 25);
+      gltf.scene.rotateX(Math.PI / 2);
+      gltf.scene.rotateY(Math.PI);
+  
+      // generateCollision(gltf.scene.children[0], lampBody);
+  
+      // importedMeshes.add(gltf.scene);
+      fish.add(gltf.scene);
+    });
+
+  // const body = new THREE.Mesh(
+  //   new THREE.BoxGeometry(10, 10, 5),
+  //   new THREE.MeshLambertMaterial({
+  //     color: "green",
+  //     flatShading: true,
+  //   })
+  // );
+  // body.position.z = 10;
+  mob1.add(fish);
 
   return mob1;
 }
