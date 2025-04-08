@@ -41,9 +41,9 @@ function Player() {
 
   const playerContainer = new THREE.Group();
   playerContainer.add(player);
-  const playerLight = new THREE.SpotLight( 0xffffff );
-  playerLight.intensity = 300;
-  playerContainer.add(playerLight);
+  // const playerLight = new THREE.SpotLight( 0xffffff );
+  // playerLight.intensity = 10000;
+  // playerContainer.add(playerLight);
 
   return playerContainer;
 }
